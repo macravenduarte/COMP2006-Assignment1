@@ -181,9 +181,13 @@ int avgScore() {
 	*/
 	string str(studentInfo);
 	string buf; //a buffer string
-	stringstream ss(str); // Inseert the string into a stream
+	stringstream ss(str); // Insert the string into a stream
 
 	vector<string> userScores; //to hold onto the scores
+
+	while (ss >> buf) {
+		userScores.push_back(buf);
+	}
 
 
 	return false;
