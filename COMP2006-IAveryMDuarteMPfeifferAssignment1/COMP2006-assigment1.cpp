@@ -4,10 +4,14 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <numeric>
 
 using namespace std;
+
 int updatedStudentIndex = -1;
 vector<string> studentInfoList;
+vector<int> userScores;
+
 string fName;
 string lName;
 string answer1;
@@ -192,24 +196,18 @@ bool hasName(string fullName) {
 	return  false;
 }
 
-int avgScore() {
 
-	/*split the string by white spaces and select the score. Store all scores
-	*	in a vector. Return the average based on the number of users score.
-	*/
-	string str(studentInfo);
-	string buf; //a buffer string
-	stringstream ss(str); // Insert the string into a stream
+/*	split the string by white spaces and select the score. Store all scores
+*	in a vector. Return the average based on the number of users score.
+*/
+int getAvgScore() {
 
-	vector<string> userScores; //to hold onto the scores
+	int totalAvgScore = accumulate(userScores.begin(), userScores.end(), 0) / userScores.size();
+	cout << "The average score is " << totalAvgScore << endl;
 
-	while (ss >> buf) {
-		userScores.push_back(buf);
-	}
-
-
-	return false;
+	return 0;
 }
+
 void getStudentInfo()
 {
 
@@ -221,6 +219,7 @@ void getStudentInfo()
 	}
 	studentsFile.close();
 }
+
 void saveStudentInfo()
 {
 	if (updatedStudentIndex != -1) {
