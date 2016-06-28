@@ -52,11 +52,6 @@ int main() {
 		}
 	}
 
-
-
-
-
-
 	ofstream writeFile("quiz.txt");
 	if (writeFile.is_open())
 	{
@@ -65,21 +60,25 @@ int main() {
 		writeFile << "curly brace\n";
 		writeFile << "square bracket\n";
 		writeFile << "the number nine\n";
+
 		writeFile << "What is C++?\n";
 		writeFile << "PROGRAMMING LANGUAGE\n";
 		writeFile << "variable\n";
 		writeFile << "class\n";
 		writeFile << "array\n";
+
 		writeFile << "What does COUT do?\n";
 		writeFile << "OUTPUT\n";
 		writeFile << "get input\n";
 		writeFile << "array\n";
 		writeFile << "read from file\n";
+
 		writeFile << "What Does CIN do?\n";
 		writeFile << "GET INPUT\n";
 		writeFile << "output data\n";
 		writeFile << "read file\n";
 		writeFile << "write to file\n";
+
 		writeFile.close();
 
 	}
@@ -127,6 +126,7 @@ int main() {
 	}
 
 	else cout << "Unable to open file";
+
 	cout << "Enter Answer For Question 1:";
 	cin >> answer1;
 	cout << "Enter Answer For Question 2:";
