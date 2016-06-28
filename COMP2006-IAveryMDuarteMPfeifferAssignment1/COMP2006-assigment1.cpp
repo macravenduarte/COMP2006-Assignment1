@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <string>
 #include <sstream>
+#include <vector>
+
 using namespace std;
 
 string fName;
@@ -139,6 +141,11 @@ int main() {
 
 	return 0;
 }
+
+/*
+*	This method will check if the user has inputted an existing name
+*	and if not it will add the new user with their new score.
+*/
 bool hasName(string fullName) {
 	while (getline(namesFile, studentInfo))
 	{
@@ -148,15 +155,37 @@ bool hasName(string fullName) {
 
 			std::stringstream ss(studentInfo);
 			string temp;
-
+			int index = 1;
 			while (getline(ss, temp, ' ')) // delimiter as space
 			{
-				cout << temp << endl;
+				if (index == 3) {
+
+					cout << "Highscore : " << temp << endl;
+				}
+				else {
+					cout << temp << endl;
+				}
+				index++;
+
 			}
-			highScore = 100;
 			return true;
 		}
 	}
 	return  false;
+}
+
+int avgScore() {
+
+	/*split the string by white spaces and select the score. Store all scores
+	*	in a vector. Return the average based on the number of users score.
+	*/
+	string str(studentInfo);
+	string buf; //a buffer string
+	stringstream ss(str); // Inseert the string into a stream
+
+	vector<string> userScores; //to hold onto the scores
+
+
+	return false;
 }
 
