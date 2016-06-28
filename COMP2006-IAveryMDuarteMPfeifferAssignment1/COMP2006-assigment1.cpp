@@ -6,7 +6,7 @@
 #include <vector>
 
 using namespace std;
-
+int updatedStudentIndex = -1;
 vector<string> studentInfoList;
 string fName;
 string lName;
@@ -21,8 +21,13 @@ string fullName;
 
 ifstream namesFile("names.txt");
 bool hasName(string);
+void saveStudentInfo();
+void getStudentInfo();
 int main() {
 
+	
+	getStudentInfo();
+	
 	cout << "Please Enter Your First Name:";
 	cin >> fName;
 	cout << "Please Enter Your Last Name:";
@@ -31,6 +36,7 @@ int main() {
 
 	if (namesFile.is_open())
 	{
+		cout << "opened file, now reading" << endl;
 		if (hasName(fullName)) {
 			cout << "Found!";
 		}
@@ -42,6 +48,7 @@ int main() {
 	}
 	else
 	{
+		cout << "File is already open, close it!";
 		ofstream writeFileNames("names.txt", fstream::app);
 		if (writeFileNames.is_open())
 		{
@@ -135,7 +142,7 @@ int main() {
 	cin >> answer3;
 	cout << "Enter Answer For Question 4:";
 	cin >> answer4;
-
+	saveStudentInfo();
 
 	cin.get();
 	cin.get();
@@ -148,13 +155,15 @@ int main() {
 *	and if not it will add the new user with their new score.
 */
 bool hasName(string fullName) {
+	int studentIndex = 0;
+	
 	while (getline(namesFile, studentInfo))
 	{
 		cout << fullName << " in " << studentInfo + "\n";
 		if (studentInfo.find(fullName) != -1)
 		{
-
-			std::stringstream ss(studentInfo);
+			updatedStudentIndex = studentIndex;
+			stringstream ss(studentInfo);
 			string temp;
 			int index = 1;
 			while (getline(ss, temp, ' ')) // delimiter as space
@@ -171,6 +180,7 @@ bool hasName(string fullName) {
 			}
 			return true;
 		}
+		studentIndex++;
 	}
 	return  false;
 }
@@ -195,10 +205,35 @@ int avgScore() {
 }
 void getStudentInfo()
 {
-	while (getline(namesFile, studentInfo))
+
+	ifstream studentsFile("names.txt");
+	while (getline(studentsFile, studentInfo))
 	{
+		cout << studentInfo << endl;
 		studentInfoList.push_back(studentInfo);
 	}
+	studentsFile.close();
+}
+void saveStudentInfo()
+{
+	if (updatedStudentIndex != -1) {
+		cout << "Updating the student info with grade of 11";
+		//cout << updatedStudentIndex;
+		studentInfoList.at(updatedStudentIndex) = fullName + " " + "ll";
+		cout << studentInfoList.at(updatedStudentIndex) << endl;
+
+
+		ofstream updateFile("names.txt");
+		if (updateFile.is_open())
+		{
+			for (int i = 0; i < studentInfoList.size(); i++) {
+				updateFile << studentInfoList.at(i)<<"\n";
+			}
+			updateFile.close();
+
+		}
+	}
+
 }
 
 
