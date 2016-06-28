@@ -7,6 +7,7 @@
 
 using namespace std;
 
+vector<string> studentInfoList;
 string fName;
 string lName;
 string answer1;
@@ -192,4 +193,12 @@ int avgScore() {
 
 	return false;
 }
+void getStudentInfo()
+{
+	while (getline(namesFile, studentInfo))
+	{
+		studentInfoList.push_back(studentInfo);
+	}
+}
+
 
