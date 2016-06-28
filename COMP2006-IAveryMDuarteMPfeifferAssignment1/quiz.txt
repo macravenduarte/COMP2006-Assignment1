@@ -1,0 +1,20 @@
+What ends lines in C++?
+SEMI-COLON
+curly brace
+square bracket
+the number nine
+What is C++?
+PROGRAMMING LANGUAGE
+variable
+class
+array
+What does COUT do?
+OUTPUT
+get input
+array
+read from file
+What Does CIN do?
+GET INPUT
+output data
+read file
+write to file
