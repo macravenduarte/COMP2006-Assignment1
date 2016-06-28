@@ -42,7 +42,14 @@ int main() {
 		}
 		else {
 			cout << "No user exits, create one!";
+			ofstream writeFileNames("names.txt", fstream::app);
+			if (writeFileNames.is_open())
+			{
+				writeFileNames << fullName + "\n";
 
+				writeFileNames.close();
+
+			}
 		}
 
 	}
