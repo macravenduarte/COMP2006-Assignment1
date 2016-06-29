@@ -33,6 +33,7 @@ void getStudentInfoFromList();
 string readQuestion(int, string);
 void getAnswerFromUser(string);
 void writeQuizQuestions();
+int getHighScore(int);
 
 int main() {
 
@@ -150,25 +151,25 @@ string readQuestion(int index, string line){
 	else {
 		switch (index % 5) {
 			case 2:
-                if(line.equals(uppercase)){
+                if(line.compare(uppercase)!=0){
                     questionAnswer = "A";
                 }
 				cout << "a) ";
 				break;
 			case 3:
-                if(line.equals(uppercase)){
+                if(line.compare(uppercase)!=0){
                     questionAnswer = "B";
                 }
 				cout << "b) ";
 				break;
 			case 4:
-                if(line.equals(uppercase)){
+                if(line.compare(uppercase)!=0){
                     questionAnswer = "C";
                 }
 				cout << "c) ";
 				break;
 			case 0:
-                if(line.equals(uppercase)){
+                if(line.compare(uppercase)!=0){
                     questionAnswer = "D";
                 }
 				cout << "d) ";
@@ -184,6 +185,7 @@ string readQuestion(int index, string line){
 }
 /*
  * This method will retrieve the answer from the user and compare against the answer
+ * if true increment the score
  */
 void getAnswerFromUser(string answer){
 
@@ -219,7 +221,7 @@ int getHighScore(int studentIndex) {
     while (getline(ss, temp, ' ')) // delimiter as space
     {
         if (index == 3) {
-            return temp;
+            return stoi(temp);
         }
         index++;
     }
