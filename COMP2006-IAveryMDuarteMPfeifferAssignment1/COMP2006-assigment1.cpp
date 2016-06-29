@@ -31,7 +31,7 @@ bool hasName(string);
 void saveStudentInfo();
 void getStudentInfoFromList();
 string readQuestion(int, string);
-void getAnswerFromUser(string);
+void getAnswerFromUser(string, int);
 void writeQuizQuestions();
 int getHighScore(int);
 
@@ -76,14 +76,18 @@ int main() {
     ifstream readFile("quiz.txt");
     if (readFile.is_open())
     {
-        int index = 0;
+        int index = 0, question = 1;
         string answer;
 
         while (getline(readFile, line))
         {
             index++;
             answer = readQuestion(index,line);
-            getAnswerFromUser(answer);
+			if (index % 5 == 0) {
+				getAnswerFromUser(answer,question);
+				question = question + 1;
+			}
+            
         }
         readFile.close();
     }
@@ -187,59 +191,84 @@ string readQuestion(int index, string line){
  * This method will retrieve the answer from the user and compare against the answer
  * if true increment the score
  */
-void getAnswerFromUser(string answer){
-    
+void getAnswerFromUser(string answer, int question){
 
 	//local variables holding the value of correct answers
-		int newAnswer;
+	int newAnswer = 0, newScore = 0;
+	
+	switch (question) {
 		//Question 1
-		cout << "Enter Answer For Question 1:";
-		cin >> answer1;
-		if (answer1 == "a") {
-			newAnswer = newAnswer + 1;
-			cout << "Correct!" << endl;
-		
-		}
-		else {
-			cout << "Inorrect!" << endl;
-		
-		}
-			//Question 2
+		case 1:
+			cout << "Enter Answer For Question 1:";
+			cin >> answer1;
+			if (answer1 == "a") {
+				newAnswer = newAnswer + 1;
+				cout << "Correct!" << endl;
+
+			}
+			else {
+				cout << "Inorrect!" << endl;
+
+			}
+			break;
+
+		//Question 2
+		case 2:
 			cout << "Enter Answer For Question 2:";
-		cin >> answer2;
-		if (answer2 == "a") {
-			newAnswer = newAnswer + 1;
-			cout << "Correct!" << endl;
-		
-		}
-		else {
-			cout << "Inorrect!" << endl;
-		
-		}
-			//Question 3
+			cin >> answer2;
+			if (answer2 == "a") {
+				newAnswer = newAnswer + 1;
+				cout << "Correct!" << endl;
+
+			}
+			else {
+				cout << "Inorrect!" << endl;
+
+			}
+			break;
+
+		//Question 3
+		case 3:
 			cout << "Enter Answer For Question 3:";
-		cin >> answer3;
-		if (answer3 == "a") {
-			newAnswer = newAnswer + 1;
-			cout << "Correct!" << endl;
-		
-		}
-		else {
-			cout << "Inorrect!" << endl;
-		
-		}
-			//Question 4
+			cin >> answer3;
+			if (answer3 == "a") {
+				newAnswer = newAnswer + 1;
+				cout << "Correct!" << endl;
+
+			}
+			else {
+				cout << "Inorrect!" << endl;
+
+			}
+			break;
+		//Question 4
+		case 4:
 			cout << "Enter Answer For Question 4:";
-		cin >> answer4;
-		if (answer4 == "a") {
-			newAnswer = newAnswer + 1;
-			cout << "Correct!" << endl;
-		
-		}
-		else {
-			cout << "Inorrect!" << endl;
-		}
+			cin >> answer4;
+			if (answer4 == "a") {
+				newAnswer = newAnswer + 1;
+				cout << "Correct!" << endl;
+
+			}
+			else {
+				cout << "Inorrect!" << endl;
+			}
+			break;
+
+	}
+			
+			
     cout << "Your Score Is:" << score << endl;
+	newScore = (newAnswer / 4) * 100;
+	
+			/*if the new score is greater than the current high score,
+					over write the current score with the new score. Else maintain last
+					highscore.
+				*/
+	if (newScore > score) {
+		highScore = newScore;
+		cout << "New High Score of " << highScore << endl;
+	}
 }
 
 bool hasName(string fullName) {
