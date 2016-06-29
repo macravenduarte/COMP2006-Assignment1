@@ -20,12 +20,11 @@ string answer3;
 string answer4;
 string userAnswer;
 string studentInfo;
+string questionAnswer;
 int score = 0;
-int newScore = 0;
 int highScore = 0;
 int totalQuestions = 0;
 string fullName;
-bool doQuiz = true;
 ifstream namesFile("names.txt");
 
 //prototypes
@@ -33,107 +32,85 @@ bool hasName(string);
 void saveStudentInfo();
 void getStudentInfoFromList();
 string readQuestion(int, string);
-void getAnswerFromUser(string, int);
+void getAnswerFromUser(string);
 void writeQuizQuestions();
 int getHighScore(int);
-void getNewHighScore(int, int);
-void startQuiz();
-void readQuestions();
 
 int main() {
-	do
-	{
-		cout << "Welcome to the quiz!" << endl;
 
-		getStudentInfoFromList();
 
-		startQuiz();
+    getStudentInfoFromList();
 
-		writeQuizQuestions();
+    cout << "Please Enter Your First Name:";
+    cin >> fName;
+    cout << "Please Enter Your Last Name:";
+    cin >> lName;
+    fullName = fName + " " + lName;
 
-		readQuestions();
+    if (namesFile.is_open())
+    {
+        cout << "opened file, now reading" << endl;
+        if (hasName(fullName)) {
+            cout << "Welcome " << fullName << ", your previous score is " << highScore <<  endl;
+        }
+        else {
+            cout << "No user exits, create one!" << endl;
+            ofstream writeFileNames("names.txt", fstream::app);
+            if (writeFileNames.is_open())
+            {
+                writeFileNames << fullName + "\n";
 
-		cout << "Do you want to continue? 1 = yes, 0 = no" << endl;
-		cin >> doQuiz;
-		if(doQuiz = 0)
-		{
-			doQuiz = false;
-		}
+                writeFileNames.close();
 
-		
-	} while (doQuiz);
-	cout << "End of Quiz" << endl;
-	return 0;
+            }
+        }
 
-}
+    }
+    else
+    {
+        cout << "File is already open, close it!" << endl;
+    }
 
-/*
-This method starts te quiz and checks the names if it exists in the text file
-*/
-void startQuiz(){
-	
-	cout << "Please Enter Your First Name:";
-	cin >> fName;
-	cout << "Please Enter Your Last Name:";
-	cin >> lName;
-	fullName = fName + " " + lName;
+    writeQuizQuestions();
 
-	if (namesFile.is_open()) {
-		cout << "opened file, now reading" << endl;
-		if (hasName(fullName)) {
-			highScore = 0;
-			cout << "Welcome " << fullName << ", your previous score is " << highScore << endl;
-		}
-		else {
-			cout << "No user exits, create one!" << endl;
-			ofstream writeFileNames("names.txt", fstream::app);
-			if (writeFileNames.is_open())
-			{
-				writeFileNames << fullName + "\n";
+    string line;
+    ifstream readFile("quiz.txt");
+    if (readFile.is_open())
+    {
+        int index = 0;
+        string answer;
 
-				writeFileNames.close();
+        while (getline(readFile, line))
+        {
+            index++;
+            string answerToQ = readQuestion(index,line);
+            if(answerToQ!=""){
+                answer = answerToQ;
+            }
+            if(index % 5 == 0){
+                getAnswerFromUser(answer);
 
-			}
-		}
+            }
+        }
+        readFile.close();
+    }
 
-	}
-	else {
-		cout << "File is already open, close it!" << endl;
-	}
-}
+    else cout << "Unable to open file" << endl;
 
-/*
-	This method will start the questions in the quiz and save the updated info
-*/
-void readQuestions() {
-	string line;
-	ifstream readFile("quiz.txt");
-	if (readFile.is_open())
-	{
-		int index = 0, question = 1;
-		string answer;
 
-		while (getline(readFile, line))
-		{
-			index++;
-			answer = readQuestion(index, line);
-			if (index % 5 == 0) {
-				getAnswerFromUser(answer, question);
-				question = question + 1;
-			}
+    saveStudentInfo();
 
-		}
-		readFile.close();
+    cout << "Would you like to do the quiz again?"<<endl;
 
-	}
+    cin.get();
+    cin.get();
 
-	else cout << "Unable to open file" << endl;
-
-	saveStudentInfo();
+    return 0;
 }
 /*
  * This method will write the questions to the quiz file
  */
+
 void writeQuizQuestions(){
     ofstream writeFile("quiz.txt");
     if (writeFile.is_open())
@@ -179,30 +156,32 @@ string readQuestion(int index, string line){
     transform(uppercase.begin(), uppercase.end(), uppercase.begin(), ::toupper);
 
     if (index % 5 == 1) {
-        cout << "Question : " << line << '\n';
+        cout << "Question " << to_string(((index-1)/5)+1) <<endl;
+        cout << line << '\n';
+        totalQuestions += 1;
     }
     else {
         switch (index % 5) {
             case 2:
-                if(line.compare(uppercase)!=0){
+                if(line.compare(uppercase)==0){
                     questionAnswer = "A";
                 }
                 cout << "a) ";
                 break;
             case 3:
-                if(line.compare(uppercase)!=0){
+                if(line.compare(uppercase)==0){
                     questionAnswer = "B";
                 }
                 cout << "b) ";
                 break;
             case 4:
-                if(line.compare(uppercase)!=0){
+                if(line.compare(uppercase)==0){
                     questionAnswer = "C";
                 }
                 cout << "c) ";
                 break;
             case 0:
-                if(line.compare(uppercase)!=0){
+                if(line.compare(uppercase)==0){
                     questionAnswer = "D";
                 }
                 cout << "d) ";
@@ -220,72 +199,14 @@ string readQuestion(int index, string line){
  * This method will retrieve the answer from the user and compare against the answer
  * if true increment the score
  */
-void getAnswerFromUser(string answer, int question){
-
-	switch (question) {
-		//Question 1
-		case 1:
-			cout << "Enter Answer For Question 1:";
-			cin >> answer1;
-			if (answer1 == "a") {
-				newScore = newScore + 1;
-				cout << "Correct!" << endl;
-
-			}
-			else {
-				cout << "Inorrect!" << endl;
-
-			}
-			break;
-
-		//Question 2
-		case 2:
-			cout << "Enter Answer For Question 2:";
-			cin >> answer2;
-			if (answer2 == "a") {
-				newScore = newScore + 1;
-				cout << "Correct!" << endl;
-
-			}
-			else {
-				cout << "Inorrect!" << endl;
-
-			}
-			break;
-
-		//Question 3
-		case 3:
-			cout << "Enter Answer For Question 3:";
-			cin >> answer3;
-			if (answer3 == "a") {
-				newScore = newScore + 1;
-				cout << "Correct!" << endl;
-
-			}
-			else {
-				cout << "Inorrect!" << endl;
-
-			}
-			break;
-		//Question 4
-		case 4:
-			cout << "Enter Answer For Question 4:";
-			cin >> answer4;
-			if (answer4 == "a") {
-				newScore = newScore + 1;
-				cout << "Correct!" << endl;
-
-			}
-			else {
-				cout << "Inorrect!" << endl;
-			}
-			break;
-
-	}
-			
-	score = newScore;
-    cout << "Your Score Is:" << newScore << endl;
-	
+void getAnswerFromUser(string answer){
+    cout << "What is your answer?";
+    cin >> userAnswer;
+    transform(userAnswer.begin(), userAnswer.end(), userAnswer.begin(), ::toupper);
+    if(userAnswer.compare(answer)==0){
+        score ++;
+    }
+    cout << "Your score is: " << score << endl;
 }
 
 bool hasName(string fullName) {
@@ -293,7 +214,7 @@ bool hasName(string fullName) {
 
     while (getline(namesFile, studentInfo))
     {
-        //cout << fullName << " in " << studentInfo + "\n";
+        cout << fullName << " in " << studentInfo + "\n";
         if (studentInfo.find(fullName) != -1)
         {
             updatedStudentIndex = studentIndex;
@@ -350,15 +271,22 @@ void saveStudentInfo()
 
     ofstream updateFile("names.txt");
 
+    int finalScore=(score/totalQuestions)*100;
+    cout << "Your final score is " << to_string(finalScore) <<endl;
     if (updatedStudentIndex != -1) {
-        cout << "Updating the student info with their high score" << endl;
-        //cout << updatedStudentIndex;
-        studentInfoList.at(updatedStudentIndex) = fullName + " " + to_string(highScore);
-        cout << studentInfoList.at(updatedStudentIndex) << endl;
+        if(finalScore > highScore){
+            cout << "Updating the student info with their new score " << to_string(finalScore) <<
+            " ("<< to_string(score) << " out of "<< to_string(totalQuestions) << ")"<< endl;
+            //cout << updatedStudentIndex;
+            studentInfoList.at(updatedStudentIndex) = fullName + " " + to_string(finalScore);
+            cout << studentInfoList.at(updatedStudentIndex) << endl;
+        }else{
+            cout << "Try again! You got "<< to_string(finalScore) << " your high score is " << to_string(highScore) << endl;
+        }
     }else {
         cout << "Adding the new student info with their high score" << endl;
         //cout << updatedStudentIndex;
-        studentInfoList.push_back(fullName + " " + to_string(highScore));
+        studentInfoList.push_back(fullName + " " + to_string(finalScore));
     }
     //added sort alphabetically
     sort(studentInfoList.begin(), studentInfoList.end());
@@ -374,12 +302,4 @@ void saveStudentInfo()
 
 }
 
-void getNewHighScore(int newScore, int score){
 
-		if (newScore > score) {
-			newScore = (score / 4) * 100;
-			highScore = newScore;
-			cout << "New High Score of " << highScore << endl;
-		}
-
-}
