@@ -1,4 +1,4 @@
-﻿#include <iostream>
+﻿﻿#include <iostream>
 #include <fstream>
 #include <algorithm>
 #include <string>
@@ -188,38 +188,12 @@ string readQuestion(int index, string line){
  * if true increment the score
  */
 void getAnswerFromUser(string answer){
-	cout << "Enter Answer For Question 1:";
-	cin >> answer1;
-
-	cout << "Enter Answer For Question 2:";
-	cin >> answer2;
-
-	cout << "Enter Answer For Question 3:";
-	cin >> answer3;
-
-	cout << "Enter Answer For Question 4:";
-	cin >> answer4;
-
-    if (answer1 == "a") {
-        score = score + 1;
-
+    cout << "What is your answer?";
+    cin >> userAnswer;
+    transform(userAnswer.begin(), userAnswer.end(), userAnswer.begin(), ::toupper);
+    if(userAnswer.compare(answer)!=0){
+        score ++;
     }
-
-
-    if (answer2 == "a") {
-        score = score + 1;
-
-    }
-
-    if (answer3 == "a") {
-        score = score + 1;
-
-    }
-    if (answer4 == "a") {
-        score = score + 1;
-
-    }
-
     cout << "Your Score Is:" << score << endl;
 }
 
