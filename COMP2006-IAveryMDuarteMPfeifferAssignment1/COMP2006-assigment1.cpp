@@ -9,22 +9,25 @@
 using namespace std;
 
 int updatedStudentIndex = -1;
+
+ifstream namesFile("names.txt");
 vector<string> studentInfoList;
 vector<int> userScores;
 
 string fName;
 string lName;
+string fullName;
+string studentInfo;
+
 string answer1;
 string answer2;
 string answer3;
 string answer4;
 
-int score = 0;
-int highScore = 0;
-string fullName;
+float currentScore = 0;
+float newHighScore = 0;
 
-ifstream namesFile("names.txt");
-string studentInfo;
+int highScore = 0;
 
 bool hasName(string);
 void saveStudentInfo();
@@ -181,8 +184,9 @@ bool hasName(string fullName) {
 			while (getline(ss, temp, ' ')) // delimiter as space
 			{
 				if (index == 3) {
-
+					currentScore = stof(temp);
 					cout << "Highscore : " << temp << endl;
+					cout << "Highscore : " << currentScore << endl;
 				}
 				else {
 					cout << temp << endl;
@@ -253,51 +257,65 @@ void saveStudentInfo()
 void checkAnswers()
 {
 	//local variables holding the value of correct answers
-	float newAnswer1, newAnswer2, newAnswer3, newAnswer4;
+	float newAnswer1, newAnswer2, newAnswer3, newAnswer4, newScore;
+
 	//Question 1
 	cout << "Enter Answer For Question 1:";
 	cin >> answer1;
-	if (answer1 == "a") {
-		newAnswer1 = 1;
-		cout << "Correct!" << endl;
-	}
-	else {
-		newAnswer1 = 0;
-		cout << "Inorrect!" << endl;
-	}
+		if (answer1 == "a") {
+			newAnswer1 = 1;
+			cout << "Correct!" << endl;
+		}
+		else {
+			newAnswer1 = 0;
+			cout << "Inorrect!" << endl;
+		}
+
 	//Question 2
 	cout << "Enter Answer For Question 2:";
 	cin >> answer2;
-	if (answer2 == "a") {
-		newAnswer2 = 1;
-		cout << "Correct!" << endl;
-	}
-	else {
-		newAnswer2 = 0;
-		cout << "Inorrect!" << endl;
-	}
+		if (answer2 == "a") {
+			newAnswer2 = 1;
+			cout << "Correct!" << endl;
+		}
+		else {
+			newAnswer2 = 0;
+			cout << "Inorrect!" << endl;
+		}
+
 	//Question 3
 	cout << "Enter Answer For Question 3:";
 	cin >> answer3;
-	if (answer3 == "a") {
-		newAnswer3 = 1;
-		cout << "Correct!" << endl;
-	}
-	else {
-		newAnswer3 = 0;
-		cout << "Inorrect!" << endl;
-	}
+		if (answer3 == "a") {
+			newAnswer3 = 1;
+			cout << "Correct!" << endl;
+		}
+		else {
+			newAnswer3 = 0;
+			cout << "Inorrect!" << endl;
+		}
+
 	//Question 4
 	cout << "Enter Answer For Question 4:";
 	cin >> answer4;
-	if (answer4 == "a") {
-		newAnswer4 = 1;
-		cout << "Correct!" << endl;
-	}
-	else {
-		newAnswer4 = 0;
-		cout << "Inorrect!" << endl;
-	}
+		if (answer4 == "a") {
+			newAnswer4 = 1;
+			cout << "Correct!" << endl;
+		}
+		else {
+			newAnswer4 = 0;
+			cout << "Inorrect!" << endl;
+		}
 
+	newScore = ((newAnswer1 + newAnswer2 + newAnswer3 + newAnswer4) / 4) * 100;
+
+	/*if the new score is greater than the current high score,
+		over write the current score with the new score. Else maintain last
+		highscore.
+	*/
+		if (newScore > currentScore) {
+			newHighScore = newScore;
+			cout << "New High Score of " << newHighScore  << endl;
+		}
 
 }
