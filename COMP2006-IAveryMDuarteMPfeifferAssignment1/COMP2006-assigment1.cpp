@@ -19,11 +19,10 @@ string answer2;
 string answer3;
 string answer4;
 string userAnswer;
-string questionAnswer;
 string studentInfo;
 int score = 0;
 int highScore = 0;
-int totalQuestions;
+int totalQuestions = 0;
 string fullName;
 ifstream namesFile("names.txt");
 
@@ -31,7 +30,7 @@ ifstream namesFile("names.txt");
 bool hasName(string);
 void saveStudentInfo();
 void getStudentInfoFromList();
-string readQuestion(int);
+string readQuestion(int, string);
 void getAnswerFromUser(string);
 void writeQuizQuestions();
 
@@ -82,7 +81,7 @@ int main() {
 		while (getline(readFile, line))
 		{
 			index++;
-			answer = readQuestion(index);
+			answer = readQuestion(index,line);
 			getAnswerFromUser(answer);
 		}
 		readFile.close();
@@ -138,8 +137,8 @@ else cout << "Unable to open file" << endl;
  * This method will read the question one at a time
  * and return the answer to that question
  */
-string readQuestion(int index){
-
+string readQuestion(int index, string line){
+    string questionAnswer = "";
 	string lowercase = line;
 	transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
 	string uppercase = line;
@@ -151,15 +150,27 @@ string readQuestion(int index){
 	else {
 		switch (index % 5) {
 			case 2:
+                if(line.equals(uppercase)){
+                    questionAnswer = "A";
+                }
 				cout << "a) ";
 				break;
 			case 3:
+                if(line.equals(uppercase)){
+                    questionAnswer = "B";
+                }
 				cout << "b) ";
 				break;
 			case 4:
+                if(line.equals(uppercase)){
+                    questionAnswer = "C";
+                }
 				cout << "c) ";
 				break;
 			case 0:
+                if(line.equals(uppercase)){
+                    questionAnswer = "D";
+                }
 				cout << "d) ";
 				break;
 
@@ -169,10 +180,10 @@ string readQuestion(int index){
 
 	}
 	//TO DO, return the answer
-	return "a";
+	return questionAnswer;
 }
 /*
- * This method will retreive the answer from the user and compare against the answer
+ * This method will retrieve the answer from the user and compare against the answer
  */
 void getAnswerFromUser(string answer){
 
