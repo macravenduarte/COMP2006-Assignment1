@@ -50,10 +50,10 @@ int main() {
 	{
 		cout << "opened file, now reading" << endl;
 		if (hasName(fullName)) {
-			cout << "Found!";
+			cout << "Welcome " << fullName << ", your previous score is " << highScore <<  endl;
 		}
 		else {
-			cout << "No user exits, create one!";
+			cout << "No user exits, create one!" << endl;
 			ofstream writeFileNames("names.txt", fstream::app);
 			if (writeFileNames.is_open())
 			{
@@ -67,7 +67,7 @@ int main() {
 	}
 	else
 	{
-		cout << "File is already open, close it!";
+		cout << "File is already open, close it!" << endl;
 	}
 
     writeQuizQuestions();
@@ -88,7 +88,7 @@ int main() {
 		readFile.close();
 	}
 
-	else cout << "Unable to open file";
+	else cout << "Unable to open file" << endl;
 
 	saveStudentInfo();
 
@@ -132,7 +132,7 @@ writeFile << "write to file\n";
 writeFile.close();
 
 }
-else cout << "Unable to open file";
+else cout << "Unable to open file" << endl;
 }
 /*
  * This method will read the question one at a time
@@ -241,7 +241,7 @@ void getStudentInfoFromList()
 void saveStudentInfo()
 {
 	if (updatedStudentIndex != -1) {
-		cout << "Updating the student info with grade of 11";
+		cout << "Updating the student info with grade of 11" << endl;
 		//cout << updatedStudentIndex;
 		studentInfoList.at(updatedStudentIndex) = fullName + " " + "ll";
 		cout << studentInfoList.at(updatedStudentIndex) << endl;
