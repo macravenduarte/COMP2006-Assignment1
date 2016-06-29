@@ -37,9 +37,9 @@ int getHighScore(int);
 
 int main() {
 
-	
+
 	getStudentInfoFromList();
-	
+
 	cout << "Please Enter Your First Name:";
 	cin >> fName;
 	cout << "Please Enter Your Last Name:";
@@ -210,13 +210,10 @@ void getAnswerFromUser(string answer){
 
 	cout << "Your Score Is:" << score << endl;
 }
-/*
-*	This method will check if the user has inputted an existing name
-*	and if not it will add the new user with their new score.
-*/
+
 bool hasName(string fullName) {
 	int studentIndex = 0;
-	
+
 	while (getline(namesFile, studentInfo))
 	{
 		cout << fullName << " in " << studentInfo + "\n";
@@ -275,6 +272,7 @@ void saveStudentInfo()
 {
 
     ofstream updateFile("names.txt");
+
 	if (updatedStudentIndex != -1) {
         cout << "Updating the student info with their high score" << endl;
         //cout << updatedStudentIndex;
