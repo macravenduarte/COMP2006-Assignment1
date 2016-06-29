@@ -18,6 +18,8 @@ string answer1;
 string answer2;
 string answer3;
 string answer4;
+string userAnswer;
+string questionAnswer;
 string studentInfo;
 int score = 0;
 int highScore = 0;
@@ -27,6 +29,8 @@ ifstream namesFile("names.txt");
 bool hasName(string);
 void saveStudentInfo();
 void getStudentInfo();
+string readQuestion(int);
+void getAnswerFromUser(string);
 int main() {
 
 	
@@ -60,14 +64,6 @@ int main() {
 	else
 	{
 		cout << "File is already open, close it!";
-		ofstream writeFileNames("names.txt", fstream::app);
-		if (writeFileNames.is_open())
-		{
-			writeFileNames << fullName + "\n";
-
-			writeFileNames.close();
-
-		}
 	}
 
 	ofstream writeFile("quiz.txt");
@@ -112,33 +108,8 @@ int main() {
 		while (getline(readFile, line))
 		{
 			index++;
-			string lowercase = line;
-			transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
-			string uppercase = line;
-			transform(uppercase.begin(), uppercase.end(), uppercase.begin(), ::toupper);
-
-			if (index % 5 == 1) {
-				cout << "Question : " << line << '\n';
-			}
-			else {
-				switch (index % 5) {
-				case 2:
-					cout << "a) ";
-					break;
-				case 3:
-					cout << "b) ";
-					break;
-				case 4:
-					cout << "c) ";
-					break;
-				case 0:
-					cout << "d) ";
-					break;
-
-
-				}
-				cout << lowercase << '\n';
-			}
+			answer = readQuestion(index);
+			getAnswerFromUser(answer);
 		}
 		readFile.close();
 	}
@@ -161,6 +132,49 @@ int main() {
 	return 0;
 }
 
+/*
+ * This method will read the question one at a time
+ * and return the answer to that question
+ */
+string readQuestion(int index){
+
+	string lowercase = line;
+	transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
+	string uppercase = line;
+	transform(uppercase.begin(), uppercase.end(), uppercase.begin(), ::toupper);
+
+	if (index % 5 == 1) {
+		cout << "Question : " << line << '\n';
+	}
+	else {
+		switch (index % 5) {
+			case 2:
+				cout << "a) ";
+				break;
+			case 3:
+				cout << "b) ";
+				break;
+			case 4:
+				cout << "c) ";
+				break;
+			case 0:
+				cout << "d) ";
+				break;
+
+
+		}
+		cout << lowercase << '\n';
+
+	}
+	//TO DO, return the answer
+	return "a";
+}
+/*
+ * This method will retreive the answer from the user and compare against the answer
+ */
+void getAnswerFromUser(string answer){
+
+}
 /*
 *	This method will check if the user has inputted an existing name
 *	and if not it will add the new user with their new score.
