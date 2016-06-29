@@ -97,7 +97,10 @@ int main() {
 
     else cout << "Unable to open file" << endl;
 
+
     saveStudentInfo();
+
+    cout << "Would you like to do the quiz again?"<<endl;
 
     cin.get();
     cin.get();
@@ -155,6 +158,7 @@ string readQuestion(int index, string line){
     if (index % 5 == 1) {
         cout << "Question " << to_string(((index-1)/5)+1) <<endl;
         cout << line << '\n';
+        totalQuestions += 1;
     }
     else {
         switch (index % 5) {
@@ -268,10 +272,17 @@ void saveStudentInfo()
     ofstream updateFile("names.txt");
 
     if (updatedStudentIndex != -1) {
-        cout << "Updating the student info with their high score" << endl;
-        //cout << updatedStudentIndex;
-        studentInfoList.at(updatedStudentIndex) = fullName + " " + to_string(highScore);
-        cout << studentInfoList.at(updatedStudentIndex) << endl;
+        int finalScore=(score/totalQuestions)*100;
+        cout << "Your final score is " << to_string(finalScore) <<endl;
+        if(finalScore > highScore){
+            cout << "Updating the student info with their new score " << to_string(finalScore) <<
+            " ("<< to_string(score) << " out of "<< to_string(totalQuestions) << ")"<< endl;
+            //cout << updatedStudentIndex;
+            studentInfoList.at(updatedStudentIndex) = fullName + " " + to_string(finalScore);
+            cout << studentInfoList.at(updatedStudentIndex) << endl;
+        }else{
+            cout << "Try again! You got "<< to_string(score) << " your high score is " << to_string(highScore) << endl;
+        }
     }else {
         cout << "Adding the new student info with their high score" << endl;
         //cout << updatedStudentIndex;
@@ -288,7 +299,7 @@ void saveStudentInfo()
         updateFile.close();
 
     }
-
+    
 }
 
 
