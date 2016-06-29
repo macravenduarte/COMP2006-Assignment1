@@ -25,6 +25,7 @@ int newScore = 0;
 int highScore = 0;
 int totalQuestions = 0;
 string fullName;
+bool doQuiz = true;
 ifstream namesFile("names.txt");
 
 //prototypes
@@ -40,16 +41,28 @@ void startQuiz();
 void readQuestions();
 
 int main() {
+	do
+	{
+		cout << "Welcome to the quiz!" << endl;
 
-	cout << "Welcome to the quiz!" << endl;
+		getStudentInfoFromList();
 
-	getStudentInfoFromList();
+		startQuiz();
 
-	startQuiz();
-	
-	writeQuizQuestions();
-	readQuestions();
-	
+		writeQuizQuestions();
+
+		readQuestions();
+
+		cout << "Do you want to continue? 1 = yes, 0 = no" << endl;
+		cin >> doQuiz;
+		if(doQuiz = 0)
+		{
+			doQuiz = false;
+		}
+
+		
+	} while (doQuiz);
+	cout << "End of Quiz" << endl;
 	return 0;
 
 }
