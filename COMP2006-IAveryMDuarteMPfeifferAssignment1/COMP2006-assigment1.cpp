@@ -259,8 +259,10 @@ void saveStudentInfo()
 		studentInfoList.at(updatedStudentIndex) = fullName + " " + "ll";
 		cout << studentInfoList.at(updatedStudentIndex) << endl;
 
+        //added sort alphabetically
+        sort(studentInfoList.begin(), studentInfoList.end());
 
-		ofstream updateFile("names.txt");
+        ofstream updateFile("names.txt");
 		if (updateFile.is_open())
 		{
 			for (int i = 0; i < studentInfoList.size(); i++) {
