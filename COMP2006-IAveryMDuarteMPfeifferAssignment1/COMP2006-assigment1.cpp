@@ -188,6 +188,18 @@ string readQuestion(int index, string line){
  * if true increment the score
  */
 void getAnswerFromUser(string answer){
+	cout << "Enter Answer For Question 1:";
+	cin >> answer1;
+
+	cout << "Enter Answer For Question 2:";
+	cin >> answer2;
+
+	cout << "Enter Answer For Question 3:";
+	cin >> answer3;
+
+	cout << "Enter Answer For Question 4:";
+	cin >> answer4;
+
     if (answer1 == "a") {
         score = score + 1;
 
