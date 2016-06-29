@@ -29,6 +29,7 @@ string studentInfo;
 bool hasName(string);
 void saveStudentInfo();
 void getStudentInfo();
+void checkAnswers();
 
 int main() {
 
@@ -151,14 +152,8 @@ int main() {
 
 	else cout << "Unable to open file";
 
-	cout << "Enter Answer For Question 1:";
-	cin >> answer1;
-	cout << "Enter Answer For Question 2:";
-	cin >> answer2;
-	cout << "Enter Answer For Question 3:";
-	cin >> answer3;
-	cout << "Enter Answer For Question 4:";
-	cin >> answer4;
+	checkAnswers();
+
 	saveStudentInfo();
 
 	cin.get();
@@ -206,12 +201,14 @@ bool hasName(string fullName) {
 /*	split the string by white spaces and select the score. Store all scores
 *	in a vector. Return the average based on the number of users score.
 */
-int getAvgScore() {
+void getAvgScore() {
 
+	//read from the vector of user highscores
+
+	//do the average and display to the user the average score
 	int totalAvgScore = accumulate(userScores.begin(), userScores.end(), 0) / userScores.size();
 	cout << "The average score is " << totalAvgScore << endl;
 
-	return 0;
 }
 
 void getStudentInfo()
@@ -245,5 +242,62 @@ void saveStudentInfo()
 
 		}
 	}
+	else cout << "No update performed!" << endl;
+
+}
+
+/*
+*	This Method will check the answers of the current user of the quiz dynamically and give a percentage
+*		after completion. If the score is higher than thier previous than update score
+*/
+void checkAnswers()
+{
+	//local variables holding the value of correct answers
+	float newAnswer1, newAnswer2, newAnswer3, newAnswer4;
+	//Question 1
+	cout << "Enter Answer For Question 1:";
+	cin >> answer1;
+	if (answer1 == "a") {
+		newAnswer1 = 1;
+		cout << "Correct!" << endl;
+	}
+	else {
+		newAnswer1 = 0;
+		cout << "Inorrect!" << endl;
+	}
+	//Question 2
+	cout << "Enter Answer For Question 2:";
+	cin >> answer2;
+	if (answer2 == "a") {
+		newAnswer2 = 1;
+		cout << "Correct!" << endl;
+	}
+	else {
+		newAnswer2 = 0;
+		cout << "Inorrect!" << endl;
+	}
+	//Question 3
+	cout << "Enter Answer For Question 3:";
+	cin >> answer3;
+	if (answer3 == "a") {
+		newAnswer3 = 1;
+		cout << "Correct!" << endl;
+	}
+	else {
+		newAnswer3 = 0;
+		cout << "Inorrect!" << endl;
+	}
+	//Question 4
+	cout << "Enter Answer For Question 4:";
+	cin >> answer4;
+	if (answer4 == "a") {
+		newAnswer4 = 1;
+		cout << "Correct!" << endl;
+	}
+	else {
+		newAnswer4 = 0;
+		cout << "Inorrect!" << endl;
+	}
+
 
 }
