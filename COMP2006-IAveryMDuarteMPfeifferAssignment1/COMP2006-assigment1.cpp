@@ -21,8 +21,11 @@ string answer4;
 string userAnswer;
 string studentInfo;
 string questionAnswer;
+
+
 int score = 0;
-int highScorePercent = 0;
+int finalScore;
+double highScorePercent;
 int highScore = 0;
 int totalQuestions = 0;
 string fullName;
@@ -201,17 +204,19 @@ string readQuestion(int index, string line){
  * if true increment the score
  */
 void getAnswerFromUser(string answer){
+	
     cout << "What is your answer?";
     cin >> userAnswer;
     transform(userAnswer.begin(), userAnswer.end(), userAnswer.begin(), ::toupper);
     if(userAnswer.compare(answer)==0){
         score ++;
     }
-	
-	highScorePercent = score / 4;
-	highScore = highScorePercent * 100;
+	highScorePercent = ((double)score / (double)totalQuestions) * 100;
+	finalScore = round(highScorePercent);
+
     cout << "Your score is: " << score << endl;
-	cout << "Your score percentage is: " << highScore << endl;
+	
+	cout << "Your score percentage is: " << finalScore << endl;
 }
 
 bool hasName(string fullName) {
@@ -276,7 +281,7 @@ void saveStudentInfo()
 
     ofstream updateFile("names.txt");
 
-    int finalScore=(score/totalQuestions)*100;
+	finalScore = round(highScorePercent);
     cout << "Your final score is " << to_string(finalScore) <<endl;
     if (updatedStudentIndex != -1) {
         if(finalScore > highScore){
