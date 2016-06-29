@@ -146,18 +146,18 @@ string readQuestion(int index, string line){
     transform(uppercase.begin(), uppercase.end(), uppercase.begin(), ::toupper);
 
     if (index % 5 == 1) {
-        cout << "Question : " << line << '\n';
+        cout << "Question " << to_string((index-1)/5) <<" : "<< line << '\n';
     }
     else {
         switch (index % 5) {
             case 2:
-                if(line.compare(uppercase)!=0){
+                if(line.compare(uppercase)==0){
                     questionAnswer = "A";
                 }
                 cout << "a) ";
                 break;
             case 3:
-                if(line.compare(uppercase)!=0){
+                if(line.compare(uppercase)==0){
                     questionAnswer = "B";
                 }
                 cout << "b) ";
