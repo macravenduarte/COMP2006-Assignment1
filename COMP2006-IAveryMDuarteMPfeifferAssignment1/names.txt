@@ -1,2 +1,6 @@
-Irin Avery 50
-Nathan Siu 100
+
+Irin Avery 95
+Marco Duarte 0
+Morrice Pfeiffer 100
+Nathan Siu 66
+new person 0
