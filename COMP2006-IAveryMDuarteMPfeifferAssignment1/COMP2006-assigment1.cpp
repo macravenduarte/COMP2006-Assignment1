@@ -24,6 +24,8 @@ string questionAnswer;
 bool doQuiz = true;
 int score = 0;
 int highScore = 0;
+int finalScore;
+double highScorePercent;
 int totalQuestions = 0;
 string fullName;
 ifstream namesFile("names.txt");
@@ -240,6 +242,9 @@ void getAnswerFromUser(string answer){
     if(userAnswer.compare(answer)==0){
         score ++;
     }
+
+	highScorePercent = ((double)score / (double)totalQuestions) * 100;
+	finalScore = round(highScorePercent);
     cout << "Your score is: " << score << endl;
 }
 
@@ -305,7 +310,7 @@ void saveStudentInfo()
 
     ofstream updateFile("names.txt");
 
-    int finalScore=(score/totalQuestions)*100;
+	finalScore = round(highScorePercent);
     cout << "Your final score is " << to_string(finalScore) <<endl;
     if (updatedStudentIndex != -1) {
         if(finalScore > highScore){
