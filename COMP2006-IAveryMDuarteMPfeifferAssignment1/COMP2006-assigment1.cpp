@@ -21,6 +21,7 @@ string answer4;
 
 int score = 0;
 int highScore = 0;
+int updatedScore;
 string fullName;
 
 ifstream namesFile("names.txt");
@@ -153,12 +154,37 @@ int main() {
 
 	cout << "Enter Answer For Question 1:";
 	cin >> answer1;
+	
 	cout << "Enter Answer For Question 2:";
 	cin >> answer2;
+	
 	cout << "Enter Answer For Question 3:";
 	cin >> answer3;
+	
 	cout << "Enter Answer For Question 4:";
 	cin >> answer4;
+	
+	if (answer1 == "a") {
+		score = score + 1;
+		
+	}
+	
+	
+	if (answer2 == "a") {
+		score = score + 1;
+		
+	}
+	
+	if (answer3 == "a") {
+		score = score + 1;
+		
+	}
+	if (answer4 == "a") {
+		score = score + 1;
+		
+	}
+	
+	cout << "Your Score Is:" << score << endl;
 	saveStudentInfo();
 
 	cin.get();
