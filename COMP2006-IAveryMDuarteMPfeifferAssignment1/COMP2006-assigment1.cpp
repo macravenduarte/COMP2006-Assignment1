@@ -188,7 +188,27 @@ string readQuestion(int index, string line){
  * if true increment the score
  */
 void getAnswerFromUser(string answer){
+	if (answer1 == "a") {
+		score = score + 1;
 
+	}
+
+
+	if (answer2 == "a") {
+		score = score + 1;
+
+	}
+
+	if (answer3 == "a") {
+		score = score + 1;
+
+	}
+	if (answer4 == "a") {
+		score = score + 1;
+
+	}
+
+	cout << "Your Score Is:" << score << endl;
 }
 /*
 *	This method will check if the user has inputted an existing name
