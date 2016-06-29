@@ -18,15 +18,18 @@ string answer1;
 string answer2;
 string answer3;
 string answer4;
-string studentInfo;
+
 int score = 0;
 int highScore = 0;
 string fullName;
 
 ifstream namesFile("names.txt");
+string studentInfo;
+
 bool hasName(string);
 void saveStudentInfo();
 void getStudentInfo();
+
 int main() {
 
 	
@@ -40,16 +43,17 @@ int main() {
 
 	if (namesFile.is_open())
 	{
-		cout << "opened file, now reading" << endl;
+		cout << "opened file, now reading.\n" << endl;
 		if (hasName(fullName)) {
-			cout << "Found!";
+			cout << "Found!\n";
 		}
 		else {
-			cout << "No user exits, create one!";
-			ofstream writeFileNames("names.txt", fstream::app);
+			cout << "No user exits, create one!\n";
+
+			ofstream writeFileNames("names.txt", ifstream::app);
 			if (writeFileNames.is_open())
 			{
-				writeFileNames << fullName + "\n";
+				writeFileNames << fullName << endl;
 
 				writeFileNames.close();
 
@@ -59,8 +63,9 @@ int main() {
 	}
 	else
 	{
-		cout << "File is already open, close it!";
-		ofstream writeFileNames("names.txt", fstream::app);
+		cout << "File is already open, close it!\n";
+		ofstream writeFileNames("names.txt", ifstream::app);
+
 		if (writeFileNames.is_open())
 		{
 			writeFileNames << fullName + "\n";
@@ -100,10 +105,11 @@ int main() {
 		writeFile.close();
 
 	}
-	else cout << "Unable to open file";
+	else cout << "Unable to open file.\n";
 
 	string line;
 	ifstream readFile("quiz.txt");
+
 	if (readFile.is_open())
 	{
 		int index = 0;
@@ -162,7 +168,7 @@ int main() {
 }
 
 /*
-*	This method will check if the user has inputted an existing name
+*	This method will check if the user has an existing name in the names.txt file
 *	and if not it will add the new user with their new score.
 */
 bool hasName(string fullName) {
@@ -241,5 +247,3 @@ void saveStudentInfo()
 	}
 
 }
-
-
