@@ -60,6 +60,9 @@ int main() {
 		{
 			doQuiz = false;
 		}
+		else {
+			doQuiz = true;
+		}
 
 
 	} while (doQuiz);
@@ -80,13 +83,13 @@ void startQuiz() {
 	fullName = fName + " " + lName;
 
 	if (namesFile.is_open()) {
-		cout << "opened file, now reading" << endl;
+		//cout << "opened file, now reading" << endl;
 		if (hasName(fullName)) {
 			highScore = 0;
 			cout << "Welcome " << fullName << ", your previous score is " << highScore << endl;
 		}
 		else {
-			cout << "No user exits, create one!" << endl;
+			//cout << "No user exits, create one!" << endl;
 			ofstream writeFileNames("names.txt", fstream::app);
 			if (writeFileNames.is_open())
 			{
@@ -99,7 +102,7 @@ void startQuiz() {
 
 	}
 	else {
-		cout << "File is already open, close it!" << endl;
+		//cout << "File is already open, close it!" << endl;
 	}
 
 }
@@ -245,7 +248,7 @@ bool hasName(string fullName) {
 
     while (getline(namesFile, studentInfo))
     {
-        cout << fullName << " in " << studentInfo + "\n";
+        //cout << fullName << " in " << studentInfo + "\n";
         if (studentInfo.find(fullName) != -1)
         {
             updatedStudentIndex = studentIndex;
