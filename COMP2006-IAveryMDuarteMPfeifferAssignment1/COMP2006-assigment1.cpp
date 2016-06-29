@@ -21,6 +21,7 @@ string answer4;
 string userAnswer;
 string studentInfo;
 int score = 0;
+int newScore = 0;
 int highScore = 0;
 int totalQuestions = 0;
 string fullName;
@@ -34,6 +35,7 @@ string readQuestion(int, string);
 void getAnswerFromUser(string, int);
 void writeQuizQuestions();
 int getHighScore(int);
+void getNewHighScore(int, int);
 
 int main() {
 
@@ -95,9 +97,6 @@ int main() {
     else cout << "Unable to open file" << endl;
 	
     saveStudentInfo();
-
-    //cin.get();
-    //cin.get();
 
     return 0;
 }
@@ -193,16 +192,13 @@ string readQuestion(int index, string line){
  */
 void getAnswerFromUser(string answer, int question){
 
-	//local variables holding the value of correct answers
-	int newAnswer = 0, newScore = 0;
-	
 	switch (question) {
 		//Question 1
 		case 1:
 			cout << "Enter Answer For Question 1:";
 			cin >> answer1;
 			if (answer1 == "a") {
-				newAnswer = newAnswer + 1;
+				newScore = newScore + 1;
 				cout << "Correct!" << endl;
 
 			}
@@ -217,7 +213,7 @@ void getAnswerFromUser(string answer, int question){
 			cout << "Enter Answer For Question 2:";
 			cin >> answer2;
 			if (answer2 == "a") {
-				newAnswer = newAnswer + 1;
+				newScore = newScore + 1;
 				cout << "Correct!" << endl;
 
 			}
@@ -232,7 +228,7 @@ void getAnswerFromUser(string answer, int question){
 			cout << "Enter Answer For Question 3:";
 			cin >> answer3;
 			if (answer3 == "a") {
-				newAnswer = newAnswer + 1;
+				newScore = newScore + 1;
 				cout << "Correct!" << endl;
 
 			}
@@ -246,7 +242,7 @@ void getAnswerFromUser(string answer, int question){
 			cout << "Enter Answer For Question 4:";
 			cin >> answer4;
 			if (answer4 == "a") {
-				newAnswer = newAnswer + 1;
+				newScore = newScore + 1;
 				cout << "Correct!" << endl;
 
 			}
@@ -257,18 +253,9 @@ void getAnswerFromUser(string answer, int question){
 
 	}
 			
-			
-    cout << "Your Score Is:" << score << endl;
-	newScore = (newAnswer / 4) * 100;
+	score = newScore;
+    cout << "Your Score Is:" << newScore << endl;
 	
-			/*if the new score is greater than the current high score,
-					over write the current score with the new score. Else maintain last
-					highscore.
-				*/
-	if (newScore > score) {
-		highScore = newScore;
-		cout << "New High Score of " << highScore << endl;
-	}
 }
 
 bool hasName(string fullName) {
@@ -357,4 +344,12 @@ void saveStudentInfo()
 
 }
 
+void getNewHighScore(int newScore, int score){
 
+		if (newScore > score) {
+			newScore = (score / 4) * 100;
+			highScore = newScore;
+			cout << "New High Score of " << highScore << endl;
+		}
+
+}
