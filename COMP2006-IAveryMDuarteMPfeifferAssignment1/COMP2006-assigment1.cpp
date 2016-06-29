@@ -24,8 +24,6 @@ string questionAnswer;
 bool doQuiz = true;
 int score = 0;
 int highScore = 0;
-int finalScore;
-double highScorePercent;
 int totalQuestions = 0;
 string fullName;
 ifstream namesFile("names.txt");
@@ -58,7 +56,7 @@ int main() {
 		cout << "Would you like to do the quiz again?" << endl;
 		cout << "1 = yes, 0 = no" << endl;
 		cin >> doQuiz;
-		if (doQuiz = 0)
+		if (doQuiz == 0)
 		{
 			doQuiz = false;
 		}
@@ -91,15 +89,7 @@ void startQuiz() {
 			cout << "Welcome " << fullName << ", your previous score is " << highScore << endl;
 		}
 		else {
-			//cout << "No user exits, create one!" << endl;
-			ofstream writeFileNames("names.txt", fstream::app);
-			if (writeFileNames.is_open())
-			{
-				writeFileNames << fullName + "\n";
-
-				writeFileNames.close();
-
-			}
+			cout << "Welcome " << fullName  << endl;
 		}
 
 	}
@@ -242,9 +232,6 @@ void getAnswerFromUser(string answer){
     if(userAnswer.compare(answer)==0){
         score ++;
     }
-
-	highScorePercent = ((double)score / (double)totalQuestions) * 100;
-	finalScore = round(highScorePercent);
     cout << "Your score is: " << score << endl;
 }
 
@@ -309,8 +296,8 @@ void saveStudentInfo()
 {
 
     ofstream updateFile("names.txt");
-
-	finalScore = round(highScorePercent);
+    double percentage= ((double)score/(double)totalQuestions)*100;
+    int finalScore = round(percentage);
     cout << "Your final score is " << to_string(finalScore) <<endl;
     if (updatedStudentIndex != -1) {
         if(finalScore > highScore){
