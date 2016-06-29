@@ -36,6 +36,8 @@ void getAnswerFromUser(string, int);
 void writeQuizQuestions();
 int getHighScore(int);
 void getNewHighScore(int, int);
+void startQuiz();
+void readQuestions();
 
 int main() {
 
@@ -43,16 +45,30 @@ int main() {
 
 	getStudentInfoFromList();
 
+	startQuiz();
+	
+	writeQuizQuestions();
+	readQuestions();
+	
+	return 0;
+
+}
+
+/*
+This method starts te quiz and checks the names if it exists in the text file
+*/
+void startQuiz(){
+	
 	cout << "Please Enter Your First Name:";
 	cin >> fName;
 	cout << "Please Enter Your Last Name:";
 	cin >> lName;
 	fullName = fName + " " + lName;
 
-	if (namesFile.is_open())
-	{
+	if (namesFile.is_open()) {
 		cout << "opened file, now reading" << endl;
 		if (hasName(fullName)) {
+			highScore = 0;
 			cout << "Welcome " << fullName << ", your previous score is " << highScore << endl;
 		}
 		else {
@@ -68,13 +84,15 @@ int main() {
 		}
 
 	}
-	else
-	{
+	else {
 		cout << "File is already open, close it!" << endl;
 	}
+}
 
-	writeQuizQuestions();
-
+/*
+	This method will start the questions in the quiz and save the updated info
+*/
+void readQuestions() {
 	string line;
 	ifstream readFile("quiz.txt");
 	if (readFile.is_open())
@@ -93,19 +111,16 @@ int main() {
 
 		}
 		readFile.close();
-		
+
 	}
 
 	else cout << "Unable to open file" << endl;
 
 	saveStudentInfo();
-	return 0;
-
 }
 /*
  * This method will write the questions to the quiz file
  */
-
 void writeQuizQuestions(){
     ofstream writeFile("quiz.txt");
     if (writeFile.is_open())
@@ -265,7 +280,7 @@ bool hasName(string fullName) {
 
     while (getline(namesFile, studentInfo))
     {
-        cout << fullName << " in " << studentInfo + "\n";
+        //cout << fullName << " in " << studentInfo + "\n";
         if (studentInfo.find(fullName) != -1)
         {
             updatedStudentIndex = studentIndex;
