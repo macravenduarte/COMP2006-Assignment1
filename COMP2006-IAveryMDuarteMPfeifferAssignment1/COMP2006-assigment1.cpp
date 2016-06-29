@@ -20,6 +20,7 @@ string answer3;
 string answer4;
 string userAnswer;
 string studentInfo;
+string questionAnswer;
 int score = 0;
 int highScore = 0;
 int totalQuestions = 0;
@@ -82,18 +83,24 @@ int main() {
         while (getline(readFile, line))
         {
             index++;
-            answer = readQuestion(index,line);
-            getAnswerFromUser(answer);
+            string answerToQ = readQuestion(index,line);
+            if(answerToQ!=""){
+                answer = answerToQ;
+            }
+            if(index % 5 == 0){
+                getAnswerFromUser(answer);
+
+            }
         }
         readFile.close();
     }
 
     else cout << "Unable to open file" << endl;
-	
+
     saveStudentInfo();
 
-    //cin.get();
-    //cin.get();
+    cin.get();
+    cin.get();
 
     return 0;
 }
@@ -146,30 +153,31 @@ string readQuestion(int index, string line){
     transform(uppercase.begin(), uppercase.end(), uppercase.begin(), ::toupper);
 
     if (index % 5 == 1) {
-        cout << "Question : " << line << '\n';
+        cout << "Question " << to_string(((index-1)/5)+1) <<endl;
+        cout << line << '\n';
     }
     else {
         switch (index % 5) {
             case 2:
-                if(line.compare(uppercase)!=0){
+                if(line.compare(uppercase)==0){
                     questionAnswer = "A";
                 }
                 cout << "a) ";
                 break;
             case 3:
-                if(line.compare(uppercase)!=0){
+                if(line.compare(uppercase)==0){
                     questionAnswer = "B";
                 }
                 cout << "b) ";
                 break;
             case 4:
-                if(line.compare(uppercase)!=0){
+                if(line.compare(uppercase)==0){
                     questionAnswer = "C";
                 }
                 cout << "c) ";
                 break;
             case 0:
-                if(line.compare(uppercase)!=0){
+                if(line.compare(uppercase)==0){
                     questionAnswer = "D";
                 }
                 cout << "d) ";
@@ -188,58 +196,13 @@ string readQuestion(int index, string line){
  * if true increment the score
  */
 void getAnswerFromUser(string answer){
-    
-
-	//local variables holding the value of correct answers
-		int newAnswer;
-		//Question 1
-		cout << "Enter Answer For Question 1:";
-		cin >> answer1;
-		if (answer1 == "a") {
-			newAnswer = newAnswer + 1;
-			cout << "Correct!" << endl;
-		
-		}
-		else {
-			cout << "Inorrect!" << endl;
-		
-		}
-			//Question 2
-			cout << "Enter Answer For Question 2:";
-		cin >> answer2;
-		if (answer2 == "a") {
-			newAnswer = newAnswer + 1;
-			cout << "Correct!" << endl;
-		
-		}
-		else {
-			cout << "Inorrect!" << endl;
-		
-		}
-			//Question 3
-			cout << "Enter Answer For Question 3:";
-		cin >> answer3;
-		if (answer3 == "a") {
-			newAnswer = newAnswer + 1;
-			cout << "Correct!" << endl;
-		
-		}
-		else {
-			cout << "Inorrect!" << endl;
-		
-		}
-			//Question 4
-			cout << "Enter Answer For Question 4:";
-		cin >> answer4;
-		if (answer4 == "a") {
-			newAnswer = newAnswer + 1;
-			cout << "Correct!" << endl;
-		
-		}
-		else {
-			cout << "Inorrect!" << endl;
-		}
-    cout << "Your Score Is:" << score << endl;
+    cout << "What is your answer?";
+    cin >> userAnswer;
+    transform(userAnswer.begin(), userAnswer.end(), userAnswer.begin(), ::toupper);
+    if(userAnswer.compare(answer)==0){
+        score ++;
+    }
+    cout << "Your score is: " << score << endl;
 }
 
 bool hasName(string fullName) {
