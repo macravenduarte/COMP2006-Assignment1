@@ -1,4 +1,4 @@
-﻿﻿#include <iostream>
+﻿#include <iostream>
 #include <fstream>
 #include <algorithm>
 #include <string>
@@ -20,6 +20,7 @@ string answer3;
 string answer4;
 string userAnswer;
 string studentInfo;
+string questionAnswer;
 int score = 0;
 int highScore = 0;
 int totalQuestions = 0;
@@ -82,8 +83,14 @@ int main() {
         while (getline(readFile, line))
         {
             index++;
-            answer = readQuestion(index,line);
-            getAnswerFromUser(answer);
+            string answerToQ = readQuestion(index,line);
+            if(answerToQ!=""){
+                answer = answerToQ;
+            }
+            if(index % 5 == 0){
+                getAnswerFromUser(answer);
+
+            }
         }
         readFile.close();
     }
@@ -146,7 +153,8 @@ string readQuestion(int index, string line){
     transform(uppercase.begin(), uppercase.end(), uppercase.begin(), ::toupper);
 
     if (index % 5 == 1) {
-        cout << "Question " << to_string((index-1)/5) <<" : "<< line << '\n';
+        cout << "Question " << to_string(((index-1)/5)+1) <<endl;
+        cout << line << '\n';
     }
     else {
         switch (index % 5) {
@@ -163,13 +171,13 @@ string readQuestion(int index, string line){
                 cout << "b) ";
                 break;
             case 4:
-                if(line.compare(uppercase)!=0){
+                if(line.compare(uppercase)==0){
                     questionAnswer = "C";
                 }
                 cout << "c) ";
                 break;
             case 0:
-                if(line.compare(uppercase)!=0){
+                if(line.compare(uppercase)==0){
                     questionAnswer = "D";
                 }
                 cout << "d) ";
@@ -191,10 +199,10 @@ void getAnswerFromUser(string answer){
     cout << "What is your answer?";
     cin >> userAnswer;
     transform(userAnswer.begin(), userAnswer.end(), userAnswer.begin(), ::toupper);
-    if(userAnswer.compare(answer)!=0){
+    if(userAnswer.compare(answer)==0){
         score ++;
     }
-    cout << "Your Score Is:" << score << endl;
+    cout << "Your score is: " << score << endl;
 }
 
 bool hasName(string fullName) {
