@@ -22,6 +22,7 @@ string userAnswer;
 string studentInfo;
 string questionAnswer;
 int score = 0;
+int highScorePercent = 0;
 int highScore = 0;
 int totalQuestions = 0;
 string fullName;
@@ -202,7 +203,11 @@ void getAnswerFromUser(string answer){
     if(userAnswer.compare(answer)==0){
         score ++;
     }
+	
+	highScorePercent = score / 4;
+	highScore = highScorePercent * 100;
     cout << "Your score is: " << score << endl;
+	cout << "Your score percentage is: " << highScore << endl;
 }
 
 bool hasName(string fullName) {
@@ -210,7 +215,7 @@ bool hasName(string fullName) {
 
     while (getline(namesFile, studentInfo))
     {
-        cout << fullName << " in " << studentInfo + "\n";
+       //cout << fullName << " in " << studentInfo + "\n";
         if (studentInfo.find(fullName) != -1)
         {
             updatedStudentIndex = studentIndex;
