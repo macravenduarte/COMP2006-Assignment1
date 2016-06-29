@@ -21,8 +21,7 @@ string answer4;
 string userAnswer;
 string studentInfo;
 string questionAnswer;
-
-
+bool doQuiz = true;
 int score = 0;
 int finalScore;
 double highScorePercent;
@@ -39,78 +38,108 @@ string readQuestion(int, string);
 void getAnswerFromUser(string);
 void writeQuizQuestions();
 int getHighScore(int);
+void startQuiz();
+void readQuestions();
 
 int main() {
 
+	do
+	{
+		cout << "Welcome to the quiz!" << endl;
 
-    getStudentInfoFromList();
+		getStudentInfoFromList();
 
-    cout << "Please Enter Your First Name:";
-    cin >> fName;
-    cout << "Please Enter Your Last Name:";
-    cin >> lName;
-    fullName = fName + " " + lName;
+		startQuiz();
 
-    if (namesFile.is_open())
-    {
-        cout << "opened file, now reading" << endl;
-        if (hasName(fullName)) {
-            cout << "Welcome " << fullName << ", your previous score is " << highScore <<  endl;
-        }
-        else {
-            cout << "No user exits, create one!" << endl;
-            ofstream writeFileNames("names.txt", fstream::app);
-            if (writeFileNames.is_open())
-            {
-                writeFileNames << fullName + "\n";
+		writeQuizQuestions();
 
-                writeFileNames.close();
+		readQuestions();
 
-            }
-        }
-
-    }
-    else
-    {
-        cout << "File is already open, close it!" << endl;
-    }
-
-    writeQuizQuestions();
-
-    string line;
-    ifstream readFile("quiz.txt");
-    if (readFile.is_open())
-    {
-        int index = 0;
-        string answer;
-
-        while (getline(readFile, line))
-        {
-            index++;
-            string answerToQ = readQuestion(index,line);
-            if(answerToQ!=""){
-                answer = answerToQ;
-            }
-            if(index % 5 == 0){
-                getAnswerFromUser(answer);
-
-            }
-        }
-        readFile.close();
-    }
-
-    else cout << "Unable to open file" << endl;
+		cout << "Would you like to do the quiz again?" << endl;
+		cout << "1 = yes, 0 = no" << endl;
+		cin >> doQuiz;
+		if (doQuiz = 0)
+		{
+			doQuiz = false;
+		}
 
 
-    saveStudentInfo();
+	} while (doQuiz);
+	cout << "End of Quiz" << endl;
 
-    cout << "Would you like to do the quiz again?"<<endl;
-
-    cin.get();
-    cin.get();
-
-    return 0;
+	return 0;
 }
+
+/*
+This method starts te quiz and checks the names if it exists in the text file
+*/
+void startQuiz() {
+
+	cout << "Please Enter Your First Name:";
+	cin >> fName;
+	cout << "Please Enter Your Last Name:";
+	cin >> lName;
+	fullName = fName + " " + lName;
+
+	if (namesFile.is_open()) {
+		cout << "opened file, now reading" << endl;
+		if (hasName(fullName)) {
+			highScore = 0;
+			cout << "Welcome " << fullName << ", your previous score is " << highScore << endl;
+		}
+		else {
+			cout << "No user exits, create one!" << endl;
+			ofstream writeFileNames("names.txt", fstream::app);
+			if (writeFileNames.is_open())
+			{
+				writeFileNames << fullName + "\n";
+
+				writeFileNames.close();
+
+			}
+		}
+
+	}
+	else {
+		cout << "File is already open, close it!" << endl;
+	}
+
+}
+
+/*
+This method will start the questions in the quiz and save the updated info
+*/
+void readQuestions() {
+
+	string line;
+	ifstream readFile("quiz.txt");
+	if (readFile.is_open())
+	{
+		int index = 0;
+		string answer;
+
+		while (getline(readFile, line))
+		{
+			index++;
+			string answerToQ = readQuestion(index, line);
+			if (answerToQ != "") {
+				answer = answerToQ;
+			}
+			if (index % 5 == 0) {
+				getAnswerFromUser(answer);
+
+			}
+		}
+		readFile.close();
+	}
+
+	else cout << "Unable to open file" << endl;
+
+
+	saveStudentInfo();
+
+}
+
 /*
  * This method will write the questions to the quiz file
  */
