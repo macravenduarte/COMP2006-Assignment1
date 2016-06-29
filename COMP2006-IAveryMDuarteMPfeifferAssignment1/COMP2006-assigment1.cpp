@@ -23,14 +23,18 @@ string questionAnswer;
 string studentInfo;
 int score = 0;
 int highScore = 0;
+int totalQuestions;
 string fullName;
-
 ifstream namesFile("names.txt");
+
+//prototypes
 bool hasName(string);
 void saveStudentInfo();
 void getStudentInfo();
 string readQuestion(int);
 void getAnswerFromUser(string);
+void writeQuizQuestions();
+
 int main() {
 
 	
@@ -66,37 +70,7 @@ int main() {
 		cout << "File is already open, close it!";
 	}
 
-	ofstream writeFile("quiz.txt");
-	if (writeFile.is_open())
-	{
-		writeFile << "What ends lines in C++?\n";
-		writeFile << "SEMI-COLON\n";
-		writeFile << "curly brace\n";
-		writeFile << "square bracket\n";
-		writeFile << "the number nine\n";
-
-		writeFile << "What is C++?\n";
-		writeFile << "PROGRAMMING LANGUAGE\n";
-		writeFile << "variable\n";
-		writeFile << "class\n";
-		writeFile << "array\n";
-
-		writeFile << "What does COUT do?\n";
-		writeFile << "OUTPUT\n";
-		writeFile << "get input\n";
-		writeFile << "array\n";
-		writeFile << "read from file\n";
-
-		writeFile << "What Does CIN do?\n";
-		writeFile << "GET INPUT\n";
-		writeFile << "output data\n";
-		writeFile << "read file\n";
-		writeFile << "write to file\n";
-
-		writeFile.close();
-
-	}
-	else cout << "Unable to open file";
+    writeQuizQuestions();
 
 	string line;
 	ifstream readFile("quiz.txt");
@@ -131,7 +105,43 @@ int main() {
 
 	return 0;
 }
+/*
+ * This method will write the questions to the quiz file
+ */
 
+void writeQuizQuestions(){
+ofstream writeFile("quiz.txt");
+if (writeFile.is_open())
+{
+writeFile << "What ends lines in C++?\n";
+writeFile << "SEMI-COLON\n";
+writeFile << "curly brace\n";
+writeFile << "square bracket\n";
+writeFile << "the number nine\n";
+
+writeFile << "What is C++?\n";
+writeFile << "PROGRAMMING LANGUAGE\n";
+writeFile << "variable\n";
+writeFile << "class\n";
+writeFile << "array\n";
+
+writeFile << "What does COUT do?\n";
+writeFile << "OUTPUT\n";
+writeFile << "get input\n";
+writeFile << "array\n";
+writeFile << "read from file\n";
+
+writeFile << "What Does CIN do?\n";
+writeFile << "GET INPUT\n";
+writeFile << "output data\n";
+writeFile << "read file\n";
+writeFile << "write to file\n";
+
+writeFile.close();
+
+}
+else cout << "Unable to open file";
+}
 /*
  * This method will read the question one at a time
  * and return the answer to that question
@@ -187,29 +197,31 @@ bool hasName(string fullName) {
 		cout << fullName << " in " << studentInfo + "\n";
 		if (studentInfo.find(fullName) != -1)
 		{
-			updatedStudentIndex = studentIndex;
-			stringstream ss(studentInfo);
-			string temp;
-			int index = 1;
-			while (getline(ss, temp, ' ')) // delimiter as space
-			{
-				if (index == 3) {
+            updatedStudentIndex = studentIndex;
+            highScore = getHighScore(updatedStudentIndex);
 
-					cout << "Highscore : " << temp << endl;
-				}
-				else {
-					cout << temp << endl;
-				}
-				index++;
-
-			}
 			return true;
 		}
 		studentIndex++;
 	}
 	return  false;
 }
-
+/*
+ * This method will return the high score of the student's information
+ */
+int getHighScore(int studentIndex) {
+    stringstream ss(studentInfoList.at(studentIndex));
+    string temp;
+    int index = 1;
+    while (getline(ss, temp, ' ')) // delimiter as space
+    {
+        if (index == 3) {
+            return temp;
+        }
+        index++;
+    }
+    return -1;
+}
 
 /*	split the string by white spaces and select the score. Store all scores
 *	in a vector. Return the average based on the number of users score.
