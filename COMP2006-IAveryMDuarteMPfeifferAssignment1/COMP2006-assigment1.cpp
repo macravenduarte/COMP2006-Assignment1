@@ -89,11 +89,11 @@ int main() {
     }
 
     else cout << "Unable to open file" << endl;
-
+	
     saveStudentInfo();
 
-    cin.get();
-    cin.get();
+    //cin.get();
+    //cin.get();
 
     return 0;
 }
@@ -188,26 +188,61 @@ string readQuestion(int index, string line){
  * if true increment the score
  */
 void getAnswerFromUser(string answer){
-    if (answer1 == "a") {
-        score = score + 1;
+    
 
-    }
-
-
-    if (answer2 == "a") {
-        score = score + 1;
-
-    }
-
-    if (answer3 == "a") {
-        score = score + 1;
-
-    }
-    if (answer4 == "a") {
-        score = score + 1;
-
-    }
-
+	//local variables holding the value of correct answers
+		int newAnswer1, newAnswer2, newAnswer3, newAnswer4;
+		//Question 1
+		cout << "Enter Answer For Question 1:";
+		cin >> answer1;
+		if (answer1 == "a") {
+			newAnswer1 = 1;
+			cout << "Correct!" << endl;
+		
+		}
+		else {
+			newAnswer1 = 0;
+			cout << "Inorrect!" << endl;
+		
+		}
+			//Question 2
+			cout << "Enter Answer For Question 2:";
+		cin >> answer2;
+		if (answer2 == "a") {
+			newAnswer2 = 1;
+			cout << "Correct!" << endl;
+		
+		}
+		else {
+			newAnswer2 = 0;
+			cout << "Inorrect!" << endl;
+		
+		}
+			//Question 3
+			cout << "Enter Answer For Question 3:";
+		cin >> answer3;
+		if (answer3 == "a") {
+			newAnswer3 = 1;
+			cout << "Correct!" << endl;
+		
+		}
+		else {
+			newAnswer3 = 0;
+			cout << "Inorrect!" << endl;
+		
+		}
+			//Question 4
+			cout << "Enter Answer For Question 4:";
+		cin >> answer4;
+		if (answer4 == "a") {
+			newAnswer4 = 1;
+			cout << "Correct!" << endl;
+		
+		}
+		else {
+			newAnswer4 = 0;
+			cout << "Inorrect!" << endl;
+		}
     cout << "Your Score Is:" << score << endl;
 }
 
