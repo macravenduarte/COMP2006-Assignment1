@@ -30,7 +30,7 @@ ifstream namesFile("names.txt");
 //prototypes
 bool hasName(string);
 void saveStudentInfo();
-void getStudentInfo();
+void getStudentInfoFromList();
 string readQuestion(int);
 void getAnswerFromUser(string);
 void writeQuizQuestions();
@@ -38,7 +38,7 @@ void writeQuizQuestions();
 int main() {
 
 	
-	getStudentInfo();
+	getStudentInfoFromList();
 	
 	cout << "Please Enter Your First Name:";
 	cin >> fName;
@@ -90,14 +90,6 @@ int main() {
 
 	else cout << "Unable to open file";
 
-	cout << "Enter Answer For Question 1:";
-	cin >> answer1;
-	cout << "Enter Answer For Question 2:";
-	cin >> answer2;
-	cout << "Enter Answer For Question 3:";
-	cin >> answer3;
-	cout << "Enter Answer For Question 4:";
-	cin >> answer4;
 	saveStudentInfo();
 
 	cin.get();
@@ -234,7 +226,7 @@ int getAvgScore() {
 	return 0;
 }
 
-void getStudentInfo()
+void getStudentInfoFromList()
 {
 
 	ifstream studentsFile("names.txt");
