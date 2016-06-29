@@ -191,17 +191,16 @@ void getAnswerFromUser(string answer){
     
 
 	//local variables holding the value of correct answers
-		int newAnswer1, newAnswer2, newAnswer3, newAnswer4;
+		int newAnswer;
 		//Question 1
 		cout << "Enter Answer For Question 1:";
 		cin >> answer1;
 		if (answer1 == "a") {
-			newAnswer1 = 1;
+			newAnswer = newAnswer + 1;
 			cout << "Correct!" << endl;
 		
 		}
 		else {
-			newAnswer1 = 0;
 			cout << "Inorrect!" << endl;
 		
 		}
@@ -209,12 +208,11 @@ void getAnswerFromUser(string answer){
 			cout << "Enter Answer For Question 2:";
 		cin >> answer2;
 		if (answer2 == "a") {
-			newAnswer2 = 1;
+			newAnswer = newAnswer + 1;
 			cout << "Correct!" << endl;
 		
 		}
 		else {
-			newAnswer2 = 0;
 			cout << "Inorrect!" << endl;
 		
 		}
@@ -222,12 +220,11 @@ void getAnswerFromUser(string answer){
 			cout << "Enter Answer For Question 3:";
 		cin >> answer3;
 		if (answer3 == "a") {
-			newAnswer3 = 1;
+			newAnswer = newAnswer + 1;
 			cout << "Correct!" << endl;
 		
 		}
 		else {
-			newAnswer3 = 0;
 			cout << "Inorrect!" << endl;
 		
 		}
@@ -235,12 +232,11 @@ void getAnswerFromUser(string answer){
 			cout << "Enter Answer For Question 4:";
 		cin >> answer4;
 		if (answer4 == "a") {
-			newAnswer4 = 1;
+			newAnswer = newAnswer + 1;
 			cout << "Correct!" << endl;
 		
 		}
 		else {
-			newAnswer4 = 0;
 			cout << "Inorrect!" << endl;
 		}
     cout << "Your Score Is:" << score << endl;
