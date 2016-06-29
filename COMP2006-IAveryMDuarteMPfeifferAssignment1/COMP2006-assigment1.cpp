@@ -38,101 +38,101 @@ int getHighScore(int);
 int main() {
 
 
-	getStudentInfoFromList();
+    getStudentInfoFromList();
 
-	cout << "Please Enter Your First Name:";
-	cin >> fName;
-	cout << "Please Enter Your Last Name:";
-	cin >> lName;
-	fullName = fName + " " + lName;
+    cout << "Please Enter Your First Name:";
+    cin >> fName;
+    cout << "Please Enter Your Last Name:";
+    cin >> lName;
+    fullName = fName + " " + lName;
 
-	if (namesFile.is_open())
-	{
-		cout << "opened file, now reading" << endl;
-		if (hasName(fullName)) {
-			cout << "Welcome " << fullName << ", your previous score is " << highScore <<  endl;
-		}
-		else {
-			cout << "No user exits, create one!" << endl;
-			ofstream writeFileNames("names.txt", fstream::app);
-			if (writeFileNames.is_open())
-			{
-				writeFileNames << fullName + "\n";
+    if (namesFile.is_open())
+    {
+        cout << "opened file, now reading" << endl;
+        if (hasName(fullName)) {
+            cout << "Welcome " << fullName << ", your previous score is " << highScore <<  endl;
+        }
+        else {
+            cout << "No user exits, create one!" << endl;
+            ofstream writeFileNames("names.txt", fstream::app);
+            if (writeFileNames.is_open())
+            {
+                writeFileNames << fullName + "\n";
 
-				writeFileNames.close();
+                writeFileNames.close();
 
-			}
-		}
+            }
+        }
 
-	}
-	else
-	{
-		cout << "File is already open, close it!" << endl;
-	}
+    }
+    else
+    {
+        cout << "File is already open, close it!" << endl;
+    }
 
     writeQuizQuestions();
 
-	string line;
-	ifstream readFile("quiz.txt");
-	if (readFile.is_open())
-	{
-		int index = 0;
-		string answer;
+    string line;
+    ifstream readFile("quiz.txt");
+    if (readFile.is_open())
+    {
+        int index = 0;
+        string answer;
 
-		while (getline(readFile, line))
-		{
-			index++;
-			answer = readQuestion(index,line);
-			getAnswerFromUser(answer);
-		}
-		readFile.close();
-	}
+        while (getline(readFile, line))
+        {
+            index++;
+            answer = readQuestion(index,line);
+            getAnswerFromUser(answer);
+        }
+        readFile.close();
+    }
 
-	else cout << "Unable to open file" << endl;
+    else cout << "Unable to open file" << endl;
 
-	saveStudentInfo();
+    saveStudentInfo();
 
-	cin.get();
-	cin.get();
+    cin.get();
+    cin.get();
 
-	return 0;
+    return 0;
 }
 /*
  * This method will write the questions to the quiz file
  */
 
 void writeQuizQuestions(){
-ofstream writeFile("quiz.txt");
-if (writeFile.is_open())
-{
-writeFile << "What ends lines in C++?\n";
-writeFile << "SEMI-COLON\n";
-writeFile << "curly brace\n";
-writeFile << "square bracket\n";
-writeFile << "the number nine\n";
+    ofstream writeFile("quiz.txt");
+    if (writeFile.is_open())
+    {
+        writeFile << "What ends lines in C++?\n";
+        writeFile << "SEMI-COLON\n";
+        writeFile << "curly brace\n";
+        writeFile << "square bracket\n";
+        writeFile << "the number nine\n";
 
-writeFile << "What is C++?\n";
-writeFile << "PROGRAMMING LANGUAGE\n";
-writeFile << "variable\n";
-writeFile << "class\n";
-writeFile << "array\n";
+        writeFile << "What is C++?\n";
+        writeFile << "PROGRAMMING LANGUAGE\n";
+        writeFile << "variable\n";
+        writeFile << "class\n";
+        writeFile << "array\n";
 
-writeFile << "What does COUT do?\n";
-writeFile << "OUTPUT\n";
-writeFile << "get input\n";
-writeFile << "array\n";
-writeFile << "read from file\n";
+        writeFile << "What does COUT do?\n";
+        writeFile << "OUTPUT\n";
+        writeFile << "get input\n";
+        writeFile << "array\n";
+        writeFile << "read from file\n";
 
-writeFile << "What Does CIN do?\n";
-writeFile << "GET INPUT\n";
-writeFile << "output data\n";
-writeFile << "read file\n";
-writeFile << "write to file\n";
+        writeFile << "What Does CIN do?\n";
+        writeFile << "GET INPUT\n";
+        writeFile << "output data\n";
+        writeFile << "read file\n";
+        writeFile << "write to file\n";
 
-writeFile.close();
+        writeFile.close();
 
-}
-else cout << "Unable to open file" << endl;
+    }
+    else cout << "Unable to open file" << endl;
 }
 /*
  * This method will read the question one at a time
@@ -140,93 +140,93 @@ else cout << "Unable to open file" << endl;
  */
 string readQuestion(int index, string line){
     string questionAnswer = "";
-	string lowercase = line;
-	transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
-	string uppercase = line;
-	transform(uppercase.begin(), uppercase.end(), uppercase.begin(), ::toupper);
+    string lowercase = line;
+    transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
+    string uppercase = line;
+    transform(uppercase.begin(), uppercase.end(), uppercase.begin(), ::toupper);
 
-	if (index % 5 == 1) {
-		cout << "Question : " << line << '\n';
-	}
-	else {
-		switch (index % 5) {
-			case 2:
+    if (index % 5 == 1) {
+        cout << "Question : " << line << '\n';
+    }
+    else {
+        switch (index % 5) {
+            case 2:
                 if(line.compare(uppercase)!=0){
                     questionAnswer = "A";
                 }
-				cout << "a) ";
-				break;
-			case 3:
+                cout << "a) ";
+                break;
+            case 3:
                 if(line.compare(uppercase)!=0){
                     questionAnswer = "B";
                 }
-				cout << "b) ";
-				break;
-			case 4:
+                cout << "b) ";
+                break;
+            case 4:
                 if(line.compare(uppercase)!=0){
                     questionAnswer = "C";
                 }
-				cout << "c) ";
-				break;
-			case 0:
+                cout << "c) ";
+                break;
+            case 0:
                 if(line.compare(uppercase)!=0){
                     questionAnswer = "D";
                 }
-				cout << "d) ";
-				break;
+                cout << "d) ";
+                break;
 
 
-		}
-		cout << lowercase << '\n';
+        }
+        cout << lowercase << '\n';
 
-	}
-	//TO DO, return the answer
-	return questionAnswer;
+    }
+    //TO DO, return the answer
+    return questionAnswer;
 }
 /*
  * This method will retrieve the answer from the user and compare against the answer
  * if true increment the score
  */
 void getAnswerFromUser(string answer){
-	if (answer1 == "a") {
-		score = score + 1;
+    if (answer1 == "a") {
+        score = score + 1;
 
-	}
+    }
 
 
-	if (answer2 == "a") {
-		score = score + 1;
+    if (answer2 == "a") {
+        score = score + 1;
 
-	}
+    }
 
-	if (answer3 == "a") {
-		score = score + 1;
+    if (answer3 == "a") {
+        score = score + 1;
 
-	}
-	if (answer4 == "a") {
-		score = score + 1;
+    }
+    if (answer4 == "a") {
+        score = score + 1;
 
-	}
+    }
 
-	cout << "Your Score Is:" << score << endl;
+    cout << "Your Score Is:" << score << endl;
 }
 
 bool hasName(string fullName) {
-	int studentIndex = 0;
+    int studentIndex = 0;
 
-	while (getline(namesFile, studentInfo))
-	{
-		cout << fullName << " in " << studentInfo + "\n";
-		if (studentInfo.find(fullName) != -1)
-		{
+    while (getline(namesFile, studentInfo))
+    {
+        cout << fullName << " in " << studentInfo + "\n";
+        if (studentInfo.find(fullName) != -1)
+        {
             updatedStudentIndex = studentIndex;
             highScore = getHighScore(updatedStudentIndex);
 
-			return true;
-		}
-		studentIndex++;
-	}
-	return  false;
+            return true;
+        }
+        studentIndex++;
+    }
+    return  false;
 }
 /*
  * This method will return the high score of the student's information
@@ -250,22 +250,22 @@ int getHighScore(int studentIndex) {
 */
 int getAvgScore() {
 
-	int totalAvgScore = accumulate(userScores.begin(), userScores.end(), 0) / userScores.size();
-	cout << "The average score is " << totalAvgScore << endl;
+    int totalAvgScore = accumulate(userScores.begin(), userScores.end(), 0) / userScores.size();
+    cout << "The average score is " << totalAvgScore << endl;
 
-	return 0;
+    return 0;
 }
 
 void getStudentInfoFromList()
 {
 
-	ifstream studentsFile("names.txt");
-	while (getline(studentsFile, studentInfo))
-	{
-		cout << studentInfo << endl;
-		studentInfoList.push_back(studentInfo);
-	}
-	studentsFile.close();
+    ifstream studentsFile("names.txt");
+    while (getline(studentsFile, studentInfo))
+    {
+        cout << studentInfo << endl;
+        studentInfoList.push_back(studentInfo);
+    }
+    studentsFile.close();
 }
 
 void saveStudentInfo()
@@ -273,27 +273,27 @@ void saveStudentInfo()
 
     ofstream updateFile("names.txt");
 
-	if (updatedStudentIndex != -1) {
+    if (updatedStudentIndex != -1) {
         cout << "Updating the student info with their high score" << endl;
         //cout << updatedStudentIndex;
-        studentInfoList.at(updatedStudentIndex) = fullName + " " + highScore;
+        studentInfoList.at(updatedStudentIndex) = fullName + " " + to_string(highScore);
         cout << studentInfoList.at(updatedStudentIndex) << endl;
     }else {
         cout << "Adding the new student info with their high score" << endl;
         //cout << updatedStudentIndex;
-        studentInfoList.push_back(fullName + " " + highScore);
+        studentInfoList.push_back(fullName + " " + to_string(highScore));
     }
-        //added sort alphabetically
-        sort(studentInfoList.begin(), studentInfoList.end());
+    //added sort alphabetically
+    sort(studentInfoList.begin(), studentInfoList.end());
 
-		if (updateFile.is_open())
-		{
-			for (int i = 0; i < studentInfoList.size(); i++) {
-				updateFile << studentInfoList.at(i)<<"\n";
-			}
-			updateFile.close();
+    if (updateFile.is_open())
+    {
+        for (int i = 0; i < studentInfoList.size(); i++) {
+            updateFile << studentInfoList.at(i)<<"\n";
+        }
+        updateFile.close();
 
-		}
+    }
 
 }
 
