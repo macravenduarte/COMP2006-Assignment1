@@ -188,26 +188,12 @@ string readQuestion(int index, string line){
  * if true increment the score
  */
 void getAnswerFromUser(string answer){
-    if (answer1 == "a") {
-        score = score + 1;
-
+    cout << "What is your answer?";
+    cin >> userAnswer;
+    transform(userAnswer.begin(), userAnswer.end(), userAnswer.begin(), ::toupper);
+    if(userAnswer.compare(answer)!=0){
+        score ++;
     }
-
-
-    if (answer2 == "a") {
-        score = score + 1;
-
-    }
-
-    if (answer3 == "a") {
-        score = score + 1;
-
-    }
-    if (answer4 == "a") {
-        score = score + 1;
-
-    }
-
     cout << "Your Score Is:" << score << endl;
 }
 
