@@ -253,16 +253,21 @@ void getStudentInfoFromList()
 
 void saveStudentInfo()
 {
-	if (updatedStudentIndex != -1) {
-		cout << "Updating the student info with grade of 11" << endl;
-		//cout << updatedStudentIndex;
-		studentInfoList.at(updatedStudentIndex) = fullName + " " + "ll";
-		cout << studentInfoList.at(updatedStudentIndex) << endl;
 
+    ofstream updateFile("names.txt");
+	if (updatedStudentIndex != -1) {
+        cout << "Updating the student info with their high score" << endl;
+        //cout << updatedStudentIndex;
+        studentInfoList.at(updatedStudentIndex) = fullName + " " + highScore;
+        cout << studentInfoList.at(updatedStudentIndex) << endl;
+    }else {
+        cout << "Adding the new student info with their high score" << endl;
+        //cout << updatedStudentIndex;
+        studentInfoList.push_back(fullName + " " + highScore);
+    }
         //added sort alphabetically
         sort(studentInfoList.begin(), studentInfoList.end());
 
-        ofstream updateFile("names.txt");
 		if (updateFile.is_open())
 		{
 			for (int i = 0; i < studentInfoList.size(); i++) {
@@ -271,7 +276,6 @@ void saveStudentInfo()
 			updateFile.close();
 
 		}
-	}
 
 }
 
