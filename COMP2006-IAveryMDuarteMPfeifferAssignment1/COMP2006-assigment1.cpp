@@ -22,6 +22,7 @@ string userAnswer;
 string studentInfo;
 string questionAnswer;
 bool doQuiz = true;
+int input;
 int score = 0;
 int highScore = 0;
 int totalQuestions = 0;
@@ -55,8 +56,8 @@ int main() {
 
 		cout << "Would you like to do the quiz again?" << endl;
 		cout << "1 = yes, 0 = no" << endl;
-		cin >> doQuiz;
-		if (doQuiz == 0)
+		cin >> input;
+		if (input == 0)
 		{
 			doQuiz = false;
 		}
@@ -286,7 +287,7 @@ void getStudentInfoFromList()
     ifstream studentsFile("names.txt");
     while (getline(studentsFile, studentInfo))
     {
-        cout << studentInfo << endl;
+        //cout << studentInfo << endl;
         studentInfoList.push_back(studentInfo);
     }
     studentsFile.close();
