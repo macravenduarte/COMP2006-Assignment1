@@ -24,9 +24,9 @@ string questionAnswer;
 bool doQuiz = true;
 int score = 0;
 int finalScore;
-double highScorePercent;
+
 int highScore = 0;
-int finalScore;
+
 double highScorePercent;
 int totalQuestions = 0;
 string fullName;
