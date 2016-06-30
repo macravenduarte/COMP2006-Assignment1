@@ -26,6 +26,8 @@ int score = 0;
 int finalScore;
 double highScorePercent;
 int highScore = 0;
+int finalScore;
+double highScorePercent;
 int totalQuestions = 0;
 string fullName;
 ifstream namesFile("names.txt");
@@ -62,6 +64,9 @@ int main() {
 		{
 			doQuiz = false;
 		}
+		else {
+			doQuiz = true;
+		}
 
 
 	} while (doQuiz);
@@ -82,13 +87,13 @@ void startQuiz() {
 	fullName = fName + " " + lName;
 
 	if (namesFile.is_open()) {
-		cout << "opened file, now reading" << endl;
+		//cout << "opened file, now reading" << endl;
 		if (hasName(fullName)) {
 			highScore = 0;
 			cout << "Welcome " << fullName << ", your previous score is " << highScore << endl;
 		}
 		else {
-			cout << "No user exits, create one!" << endl;
+			//cout << "No user exits, create one!" << endl;
 			ofstream writeFileNames("names.txt", fstream::app);
 			if (writeFileNames.is_open())
 			{
@@ -101,7 +106,7 @@ void startQuiz() {
 
 	}
 	else {
-		cout << "File is already open, close it!" << endl;
+		//cout << "File is already open, close it!" << endl;
 	}
 
 }
