@@ -23,8 +23,8 @@ string studentInfo;
 string questionAnswer;
 bool doQuiz = true;
 int input;
-int score = 0;
-int highScore = 0;
+int score;
+int highScore;
 int totalQuestions = 0;
 string fullName;
 ifstream namesFile("names.txt");
@@ -92,9 +92,6 @@ void startQuiz() {
 			cout << "Welcome " << fullName  << endl;
 		}
 
-	}
-	else {
-		//cout << "File is already open, close it!" << endl;
 	}
 
 }
@@ -264,6 +261,7 @@ int getHighScore(int studentIndex) {
     while (getline(ss, temp, ' ')) // delimiter as space
     {
         if (index == 3) {
+			highScore = stoi(temp);
             return stoi(temp);
         }
         index++;
@@ -284,7 +282,6 @@ int getAvgScore() {
 
 void getStudentInfoFromList()
 {
-
     ifstream studentsFile("names.txt");
     while (getline(studentsFile, studentInfo))
     {
@@ -296,19 +293,23 @@ void getStudentInfoFromList()
 
 void saveStudentInfo()
 {
-
-    ofstream updateFile("names.txt");
+	ofstream updateFile("names.txt");
     double percentage= ((double)score/(double)totalQuestions)*100;
     int finalScore = round(percentage);
+
     cout << "Your final score is " << to_string(finalScore) <<endl;
+
     if (updatedStudentIndex != -1) {
-        if(finalScore > highScore){
+        if(finalScore > highScore) {
             cout << "Updating the student info with their new score " << to_string(finalScore) <<
             " ("<< to_string(score) << " out of "<< to_string(totalQuestions) << ")"<< endl;
-            //cout << updatedStudentIndex;
+
             studentInfoList.at(updatedStudentIndex) = fullName + " " + to_string(finalScore);
             cout << studentInfoList.at(updatedStudentIndex) << endl;
-        }else{
+
+        }
+		else
+		{
             cout << "Try again! You got "<< to_string(finalScore) << " your high score is " << to_string(highScore) << endl;
         }
     }else {
@@ -322,8 +323,10 @@ void saveStudentInfo()
     if (updateFile.is_open())
     {
         for (int i = 0; i < studentInfoList.size(); i++) {
-            updateFile << studentInfoList.at(i)<<"\n";
+			
+            updateFile << studentInfoList.at(i) << "\n";
         }
+		studentInfoList.clear();
         updateFile.close();
 
     }
