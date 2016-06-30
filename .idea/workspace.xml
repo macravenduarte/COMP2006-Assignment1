@@ -35,8 +35,8 @@
       <file leaf-file-name="COMP2006-assigment1.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/COMP2006-IAveryMDuarteMPfeifferAssignment1/COMP2006-assigment1.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="189" column="38" selection-start-line="189" selection-start-column="38" selection-end-line="196" selection-end-column="46" />
+            <state relative-caret-position="2338">
+              <caret line="93" column="5" selection-start-line="93" selection-start-column="5" selection-end-line="93" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -73,7 +73,7 @@
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
-    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="false" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
     <ConfirmationsSetting value="0" id="Add" />
@@ -452,7 +452,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="2" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -490,8 +490,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/COMP2006-IAveryMDuarteMPfeifferAssignment1/COMP2006-assigment1.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="189" column="38" selection-start-line="189" selection-start-column="38" selection-end-line="196" selection-end-column="46" />
+        <state relative-caret-position="2338">
+          <caret line="93" column="5" selection-start-line="93" selection-start-column="5" selection-end-line="93" selection-end-column="5" />
           <folding />
         </state>
       </provider>
