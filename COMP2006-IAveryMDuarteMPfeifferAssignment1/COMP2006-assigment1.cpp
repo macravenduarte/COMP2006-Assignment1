@@ -86,7 +86,6 @@ void startQuiz() {
 	if (namesFile.is_open()) {
 		//cout << "opened file, now reading" << endl;
 		if (hasName(fullName)) {
-			highScore = 0;
 			cout << "Welcome " << fullName << ", your previous score is " << highScore << endl;
 		}
 		else {
@@ -111,6 +110,8 @@ void readQuestions() {
 	{
 		int index = 0;
 		string answer;
+        totalQuestions = 0;
+        score = 0;
 
 		while (getline(readFile, line))
 		{
